@@ -16,6 +16,7 @@ let gaseosa
 let tamanoGaseosa
 let descuento
 
+
 //Acá comienzan las funciones
 //esta función sirve para seleccionar el tipo 
 //En todas estas funciones utilizo un while para validad el ingreso de los datos

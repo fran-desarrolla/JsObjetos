@@ -7,9 +7,15 @@ const precioQueso = 40
 const precioJamon = 70
 const precioLechuga = 30
 const precioTomate = 45
-
+const precioPapasChicas = 120
+const precioPapasMedianas = 150
+const precioPapasGrandes = 180
+const precioGaseosaChica = 200
+const precioGaseosaMediana = 240
+const precioGaseosaGrande = 260
+const precioDescuento = 0.90
 class Combo {
-    constructor(pan, precioPan, medallon, cantidadMedallon, precioMedallon, queso, jamon, lechuga, tomate, precioQueso, precioJamon, precioLechuga, precioTomate) {
+    constructor(pan, precioPan, medallon, cantidadMedallon, precioMedallon, queso, jamon, lechuga, tomate, precioQueso, precioJamon, precioLechuga, precioTomate, sizePapas, papas, gaseosa, sizeGaseosa, precioGaseosa, descuento, precioDescuento, totalCombo) {
 
         this.pan = pan;
         this.precioPan = precioPan;
@@ -24,6 +30,15 @@ class Combo {
         this.precioJamon = precioJamon;
         this.precioLechuga = precioLechuga;
         this.precioTomate = precioTomate;
+        this.sizePapas = sizePapas;
+        this.papas = papas;
+        this.gaseosa = gaseosa;
+        this.sizeGaseosa = sizeGaseosa;
+        this.precioGaseosa = precioGaseosa;
+        this.descuento= descuento;
+        this.precioDescuento = precioDescuento;
+        this.totalCombo = totalCombo;
+
     }
     seleccionaPan() {
         this.pan = prompt("seleccione el tipo de pan que desea (normal - de papa)")
@@ -81,6 +96,7 @@ class Combo {
 
         if (this.queso == "no") {
             console.log("Sin queso")
+            this.precioQueso = 0
         } else {
             this.precioQueso = precioQueso
             console.log("Con queso: $" + this.precioQueso)
@@ -97,6 +113,7 @@ class Combo {
 
         if (this.jamon == "no") {
             console.log("Sin jamón")
+            this.precioJamon = 0
         } else {
             this.precioJamon = precioJamon
             console.log("Con jamón: $" + this.precioJamon)
@@ -113,13 +130,105 @@ class Combo {
 
         if (this.lechuga == "no") {
             console.log("Sin lechuga")
+            this.precioLechuga = 0
         } else {
             this.precioLechuga = precioLechuga
             console.log("Con lechuga: $" + this.precioLechuga)
         }
     }
 
+    seleccionaTomate() {
+        this.tomate = prompt("¿Desea su hamburguesa con tomate? (sí - no)").toLowerCase()
+
+
+        while (this.tomate !== "si" && this.tomate !== "no" && this.tomate !== "sí") {
+            this.tomate = prompt("¿Desea su hamburguesa con tomate? (sí - no)").toLowerCase()
+        }
+
+        if (this.tomate == "no") {
+            console.log("Sin tomate")
+            this.precioTomate = 0
+        } else {
+            this.precioTomate = precioLechuga
+            console.log("Con tomate: $" + this.precioTomate)
+        }
+    }
+
+
+
+    seleccionaPapas() {
+        this.sizePapas = prompt("¿Qué tamaño de papas desea? (chicas - medianas - grandes)").toLowerCase()
+
+
+        while (this.sizePapas !== "chicas" && this.sizePapas !== "medianas" && this.sizePapas !== "grandes") {
+            this.sizePapas = prompt("¿Qué tamaño de papas desea? (chicas - medianas - grandes)").toLowerCase()
+        }
+
+        if (this.sizePapas == "chicas") {
+            this.papas = precioPapasChicas
+        } else if (this.sizePapas == "medianas"){
+            this.papas = precioPapasMedianas
+        } else {
+            this.papas = precioPapasGrandes 
+        }
+        
+        console.log("Papas " + combo1.sizePapas + ": $" + combo1.papas)
+    }
+
+    seleccionaGaseosa(){
+        this.gaseosa = prompt("¿Qué gaseosa desea? (Coca - Fanta - Sprite)").toLowerCase()
+
+        while (this.gaseosa !== "coca" && this.gaseosa !== "fanta" && this.gaseosa !== "sprite") {
+            this.gaseosa = prompt("¿Qué gaseosa desea? (Coca - Fanta - Sprite)").toLowerCase()
+        }
+      
+        
+        this.sizeGaseosa = prompt("¿Qué tamaño de gaseosa desea? (chica - mediana - grande)").toLowerCase()
+
+        while (this.sizeGaseosa !== "chica" && this.sizeGaseosa !== "mediana" && this.sizeGaseosa !== "grande") {
+            this.sizeGaseosa = prompt("¿Qué tamaño de gaseosa desea? (chica - mediana - grande)").toLowerCase()
+        }
+
+        if(this.sizeGaseosa == "chica"){
+            this.precioGaseosa = precioGaseosaChica
+        }else if(this.sizeGaseosa == "mediana"){
+            this.precioGaseosa = precioGaseosaMediana
+        }else{
+            this.precioGaseosa = precioGaseosaGrande
+        }
+
+   
+    
+    
+    console.log(this.gaseosa + " " + this.sizeGaseosa + ": $" + this.precioGaseosa)
 }
+
+aplicaDescuento(){
+
+    this.descuento = prompt ("Es jubilado o estudiante (si - no)").toLowerCase()
+
+    while(this.descuento !=="si" && this.descuento !== "no" && this.descuento !=="sí"){
+        this.descuento = prompt ("Es jubilado o estudiante (si - no)").toLowerCase()
+    }
+
+    if (this.descuento =="si"){
+        this.totalCombo = this.totalCombo * precioDescuento
+        console.log("Descuento por jubilado o estudiante")
+        console.log("TOTAL= $" + this.totalCombo)
+    }
+
+
+}
+
+calculaTotal(){
+    this.totalCombo = this.precioPan + this.precioMedallon + this.precioJamon + this.precioQueso + this.precioLechuga + this.precioTomate + this.precioGaseosa + this.papas;
+    console.log("TOTAL= $" + this.totalCombo)
+}
+
+
+}
+
+ 
 
 const combo1 = new Combo()
 
@@ -128,3 +237,10 @@ combo1.seleccionaMedallon()
 combo1.seleccionaQueso()
 combo1.seleccionaJamon()
 combo1.seleccionaLechuga()
+combo1.seleccionaTomate()
+combo1.seleccionaPapas()
+combo1.seleccionaGaseosa()
+combo1.calculaTotal()
+combo1.aplicaDescuento()
+
+
